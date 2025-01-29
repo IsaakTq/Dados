@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Dados</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .dice {
+            font-size: 100px;
+            margin: 20px;
+            display: inline-block;
+            transition: transform 0.5s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .result {
+            font-size: 1.5rem;
+            margin: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <h1>Prueba tu Suerte!</h1>
+    <div class="dice-container">
+        <div class="dice" id="dice1">🎲</div>
+        <div class="dice" id="dice2">🎲</div>
+    </div>
+    <div class="result" id="result">Presiona el botón para tirar los dados.</div>
+    <button onclick="rollDice()">Tirar Dados</button>
+
+    <script>
+        function rollDice() {
+            const diceFaces = ["&#9856;", "&#9857;", "&#9858;", "&#9859;", "&#9860;", "&#9861;"];
+            const randomIndex1 = Math.floor(Math.random() * diceFaces.length);
+            const randomIndex2 = Math.floor(Math.random() * diceFaces.length);
+
+            const dice1 = document.getElementById('dice1');
+            const dice2 = document.getElementById('dice2');
+            const result = document.getElementById('result');
+
+            // Add animation
+            dice1.style.transform = 'rotate(360deg)';
+            dice2.style.transform = 'rotate(360deg)';
+
+            setTimeout(() => {
+                dice1.style.transform = 'rotate(0deg)';
+                dice2.style.transform = 'rotate(0deg)';
+                dice1.innerHTML = diceFaces[randomIndex1];
+                dice2.innerHTML = diceFaces[randomIndex2];
+                result.textContent = `¡Sacaste un ${randomIndex1 + 1} y un ${randomIndex2 + 1}! Total: ${randomIndex1 + randomIndex2 + 2}`;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
